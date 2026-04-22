@@ -1,0 +1,13 @@
+{
+  "name": "quickcare-backend",
+  "version": "1.0.0",
+  "description": "QuickCare REST API - Backend for the traveler healthcare platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["healthcare", "travel", "api", "express", "mongodb"],
+  "author": "daksh006v",
+  "license": "MIT"
+}
