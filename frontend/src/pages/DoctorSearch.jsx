@@ -1,4 +1,5 @@
 import React from 'react';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function DoctorSearch() {
   return (
@@ -16,6 +17,7 @@ export default function DoctorSearch() {
             </nav>
           </div>
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <button className="px-4 py-2 text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-all scale-95 active:opacity-80">Sign In</button>
             <button className="px-5 py-2.5 bg-blue-700 dark:bg-blue-400 text-white dark:text-slate-950 font-bold rounded-xl shadow-sm hover:translate-y-[-1px] transition-all scale-95 active:opacity-80">Emergency Call</button>
           </div>
