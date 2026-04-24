@@ -12,7 +12,7 @@ export default function SymptomChecker() {
                     <Link to="/" className="text-2xl font-bold tracking-tighter text-blue-800 dark:text-blue-300 font-headline">QuickCare</Link>
                     <div className="hidden md:flex items-center gap-6">
                         <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200 font-label" to="/search">Find Care</Link>
-                        <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200 font-label" to="#">Traveler Mode</Link>
+                        <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200 font-label" to="/traveler-mode">Traveler Mode</Link>
                         <Link className="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-600 font-label" to="/symptom-checker">Symptoms</Link>
                         <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200 font-label" to="#">History</Link>
                     </div>

@@ -12,7 +12,7 @@ export default function LandingPage() {
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             <Link className="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-600" to="/search">Find Care</Link>
-            <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" to="#">Traveler Mode</Link>
+            <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" to="/traveler-mode">Traveler Mode</Link>
             <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" to="/symptom-checker">Symptoms</Link>
             <Link className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-500 transition-colors duration-200" to="#">History</Link>
           </div>
