@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import LandingPage from './pages/LandingPage';
 import DoctorSearch from './pages/DoctorSearch';
 import SymptomChecker from './pages/SymptomChecker';
@@ -11,6 +12,25 @@ import Signup from './pages/Signup';
 function App() {
   return (
     <BrowserRouter>
+      {/* Global toast notification container */}
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 4000,
+          style: {
+            borderRadius: '12px',
+            fontSize: '14px',
+            fontWeight: '500',
+          },
+          success: {
+            iconTheme: { primary: '#22c55e', secondary: '#fff' },
+          },
+          error: {
+            iconTheme: { primary: '#ef4444', secondary: '#fff' },
+          },
+        }}
+      />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/search" element={<DoctorSearch />} />
@@ -25,3 +45,4 @@ function App() {
 }
 
 export default App;
+
