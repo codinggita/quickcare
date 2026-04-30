@@ -1,9 +1,34 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { login, isLoading } = useAuth();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Invalid email address').required('Email is required'),
+      password: Yup.string().required('Password is required'),
+    }),
+    onSubmit: async (values) => {
+      const result = await login(values);
+      if (result.success) {
+        toast.success('Welcome back!');
+        navigate('/');
+      } else {
+        toast.error(result.message || 'Login failed');
+      }
+    },
+  });
 
   return (
     <div className="bg-surface-dim text-on-surface min-h-screen flex items-center justify-center p-4 md:p-8" style={{ fontFamily: "'Manrope', sans-serif" }}>
@@ -51,34 +76,45 @@ export default function Login() {
               <p className="text-lg text-on-surface-variant">Securely access your health records and appointments.</p>
             </div>
 
-            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); navigate('/'); }}>
+            <form className="space-y-6" onSubmit={formik.handleSubmit}>
               {/* Email */}
               <div>
                 <label className="block text-sm font-semibold text-on-surface-variant mb-2 ml-1" htmlFor="email">Email Address</label>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+                  <span className={`material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 ${formik.touched.email && formik.errors.email ? 'text-error' : 'text-outline group-focus-within:text-primary'} transition-colors`}>mail</span>
                   <input
-                    className="w-full bg-surface-container-highest border-0 rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary focus:bg-surface-bright transition-all"
+                    className={`w-full bg-surface-container-highest border-2 ${formik.touched.email && formik.errors.email ? 'border-error focus:ring-error' : 'border-transparent focus:border-primary'} rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-0 focus:bg-surface-bright transition-all`}
                     id="email"
+                    name="email"
                     placeholder="name@example.com"
                     type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
                   />
                 </div>
+                {formik.touched.email && formik.errors.email ? (
+                  <div className="text-error text-sm mt-1 ml-1 font-medium">{formik.errors.email}</div>
+                ) : null}
               </div>
 
               {/* Password */}
               <div>
                 <div className="flex justify-between items-center mb-2 ml-1 mr-1">
                   <label className="block text-sm font-semibold text-on-surface-variant" htmlFor="password">Password</label>
-                  <a className="text-sm text-primary hover:opacity-80 transition-opacity" href="#">Forgot password?</a>
+                  <Link className="text-sm text-primary hover:opacity-80 transition-opacity" to="#">Forgot password?</Link>
                 </div>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+                  <span className={`material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 ${formik.touched.password && formik.errors.password ? 'text-error' : 'text-outline group-focus-within:text-primary'} transition-colors`}>lock</span>
                   <input
-                    className="w-full bg-surface-container-highest border-0 rounded-lg py-4 pl-12 pr-12 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary focus:bg-surface-bright transition-all"
+                    className={`w-full bg-surface-container-highest border-2 ${formik.touched.password && formik.errors.password ? 'border-error focus:ring-error' : 'border-transparent focus:border-primary'} rounded-lg py-4 pl-12 pr-12 text-on-surface placeholder:text-outline focus:ring-0 focus:bg-surface-bright transition-all`}
                     id="password"
+                    name="password"
                     placeholder="••••••••"
                     type={showPassword ? 'text' : 'password'}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
                   />
                   <button
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
@@ -88,13 +124,24 @@ export default function Login() {
                     <span className="material-symbols-outlined text-xl">{showPassword ? 'visibility' : 'visibility_off'}</span>
                   </button>
                 </div>
+                {formik.touched.password && formik.errors.password ? (
+                  <div className="text-error text-sm mt-1 ml-1 font-medium">{formik.errors.password}</div>
+                ) : null}
               </div>
 
               <button
-                className="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary font-bold rounded-xl py-4 shadow-lg hover:opacity-90 transition-opacity mt-8"
+                className="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary font-bold rounded-xl py-4 shadow-lg hover:opacity-90 transition-opacity mt-8 flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 type="submit"
+                disabled={isLoading}
               >
-                Sign In
+                {isLoading ? (
+                  <>
+                    <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                    Signing in...
+                  </>
+                ) : (
+                  'Sign In'
+                )}
               </button>
             </form>
 
