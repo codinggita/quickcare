@@ -51,8 +51,9 @@ export default function DoctorDetail() {
           <div className="md:col-span-2 bg-surface-container-low rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row gap-8 items-center md:items-start">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-bright flex-shrink-0">
               <img
-                alt="Doctor profile"
+                alt="Dr. Sarah Jenkins, Cardiology Specialist portrait"
                 className="w-full h-full object-cover"
+                loading="lazy"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuA47IhFp8-Y19_xvNtW7n2msqeIfC_n3A3uu9XDGWD4Pnr4Ovoz3XkVwdZC0AySWc2GVXLBdE5tk1_xXttVgxVS1pcQwvXFiDW6ibi_marEnv0_xhV-fG9pbE51UZEP_GCVyT3idJc9Qa9Esg71sNLYJVyU5_U7FqwLxc66MIgiQT8KsQzfES6SvyC6uewwRycGyu7qwFZWVNY2mB7QbWziqIZNpQyVlPV2EU28wm6GbxO3uBktkUAHAHH1Maw-y0GWHO8Ah_LSV0Y"
               />
             </div>
